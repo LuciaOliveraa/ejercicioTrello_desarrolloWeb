@@ -1,0 +1,49 @@
+.body {
+    background-color: rgb(248, 241, 231);
+    min-height: 100vh;
+}
+
+
+.title {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-emphasis-color: rgb(49, 47, 47);
+    
+}
+
+.button {
+    margin: 15px;
+    justify-content: right;
+    background-color: rgb(249, 216, 221);
+}
+
+.columns {
+    vertical-align: middle;
+    justify-content: center;
+}
+
+.column {
+    background-color: rgb(249, 216, 221);
+    margin: 15px;
+    min-width: 50px;
+    border-radius: 20px;
+}
+
+.column-title {
+    font-weight: bolder;
+    text-align: center;
+    background-color: rgb(221, 168, 177);
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.cell {
+    background-color: rgb(248, 241, 231);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.task-title {
+    font-weight: bold;
+}
