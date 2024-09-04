@@ -9,7 +9,7 @@
     margin-bottom: 15px;
     text-align: center;
     text-emphasis-color: rgb(49, 47, 47);
-    
+
 }
 
 .button {
@@ -25,9 +25,12 @@
 
 .column {
     background-color: rgb(249, 216, 221);
-    margin: 15px;
-    min-width: 50px;
+    margin: 10px;
+    /* min-width: 30px; */
     border-radius: 20px;
+    /* border-left: 0px;
+    border-right: 0px; */
+    
 }
 
 .column-title {
@@ -38,12 +41,19 @@
     margin-bottom: 15px;
 }
 
-.cell {
+.card {
     background-color: rgb(248, 241, 231);
-    border-radius: 10px;
-    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    /* border-radius: 10px; */
+    /* padding: 15px; */
 }
 
 .task-title {
     font-weight: bold;
+}
+
+.buttons-container {
+    justify-content: center;
 }
