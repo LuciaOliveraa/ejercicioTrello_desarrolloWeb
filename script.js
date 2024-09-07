@@ -6,7 +6,7 @@ let tareas = [
         asignado: "Persona",
         estado: "Backlog",
         prioridad: "Prioridad alta",
-        fecha: "12-09-24"
+        fecha: "2024-09-12"
     },
     {
         id: 1,
@@ -15,11 +15,12 @@ let tareas = [
         asignado: "Cucaracha",
         estado: "Blocked",
         prioridad: "Prioridad media",
-        fecha: "22-09-24"
+        fecha: "2024-09-22"
     }
 ]
 
 let idActual = tareas.length;
+let currentTarget = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Functions to open and close a modal
@@ -65,6 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     agregarTarea();
     cancelarButton();
+    actualizarButton();
+    eliminarButton();
   });
 
   function crearTarea(tarea) {
@@ -83,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="card-footer-item"> ${tarea.fecha} </span>
                         </footer>
                     </div>`
-    
+    console.log(tarea.titulo);
     mostrarTarea(tarea, template);
   }
 
@@ -94,14 +97,27 @@ document.addEventListener('DOMContentLoaded', () => {
     //columna.insertAdjacentHTML("beforeend", tarjeta);
     tarjeta.innerHTML = template;
     columna.appendChild(tarjeta);
-
+    
+    tarjeta.addEventListener("click", () => {
+              currentTarget = tarea;
+              editTareaHandler();
+            });
   }
 
   function loadTareas() {
+    const columnas = ["Backlog", "To do", "In progress", "Blocked", "Done"];
+    
+    //vacia columnas
+    columnas.forEach(columnaId => {
+        const columna = document.getElementById(columnaId);
+        columna.innerHTML = "";
+    });
+
+    //llena columnas
     tareas.forEach(tarea => {
       crearTarea(tarea);
     });
-    tareas = [];
+    //tareas = [];
   }
 
   function agregarTarea() {
@@ -130,8 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fecha: fecha.value
     }
 
-    console.log(estado.value);
-
     tareas.push(nuevaTarea);
     idActual = idActual +1;
 
@@ -147,8 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function cancelarButton() {
     const cancelarButton = document.getElementById("cancelar-button");
+    const cancelarButton2 = document.getElementById("cancelar-button2");
 
     cancelarButton.addEventListener("click", cancelarButtonHandler);
+    cancelarButton2.addEventListener("click", cancelarButtonHandler);
   }
 
   function cancelarButtonHandler(event) {
@@ -167,6 +183,79 @@ document.addEventListener('DOMContentLoaded', () => {
     estado.value = "";
     prioridad.value = "";
     fecha.value = "";
+  }
+
+  function editTareaHandler(event) {
+    const tarea = currentTarget;
+
+    const titulo = document.getElementById("titulo-edit");
+    const descripcion = document.getElementById("descripcion-edit");
+    const asignado = document.getElementById("asignado-edit");
+    const estado = document.getElementById("estado-edit");
+    const prioridad =document.getElementById("prioridad-edit");
+    const fecha = document.getElementById("fecha-edit");
+
+    titulo.value = tarea.titulo;
+    descripcion.value = tarea.descripcion;
+    asignado.value = tarea.asignado;
+    estado.value = tarea.estado;
+    prioridad.value = tarea.prioridad;
+    fecha.value = tarea.fecha;
+
+    console.log(tarea);
+    console.log(titulo.value);
+    console.log(descripcion.value);
+    console.log(asignado.value);
+    console.log(estado.value);
+    console.log(prioridad.value);
+    console.log(fecha.value);
+
+    const editModal = document.getElementById('modal-editar-tarea');
+    editModal.classList.add('is-active');
+  }
+
+  function actualizarButton() {
+    const actualizarButton = document.getElementById("actualizar-button");
+    actualizarButton.addEventListener("click", actualizarButtonHandler);   
+  }
+
+  function actualizarButtonHandler(event) {
+    event.preventDefault();
+    const tarea = currentTarget;
+    
+    const titulo = document.getElementById("titulo-edit");
+    const descripcion = document.getElementById("descripcion-edit");
+    const asignado = document.getElementById("asignado-edit");
+    const estado = document.getElementById("estado-edit");
+    const prioridad =document.getElementById("prioridad-edit");
+    const fecha = document.getElementById("fecha-edit");
+
+    tarea.titulo = titulo.value;
+    tarea.descripcion = descripcion.value;
+    tarea.asignado = asignado.value;
+    tarea.estado = estado.value;
+    tarea.prioridad = prioridad.value;
+    tarea.fecha = fecha.value;
+
+    //tareas.push(tarea); //esta linea necesitaba una eliminación de la tarea, en vez, uso las líneas de a continuación para modificar la tarea.
+    
+   const index = tareas.findIndex(t => t.id === tarea.id);
+    if (index !== -1) {
+        tareas[index] = tarea; 
+    }
+
+    loadTareas();
+  }
+
+  function eliminarButton() {
+    const eliminarButton = document.getElementById("eliminar-button");
+    eliminarButton.addEventListener("click", eliminarButtonHandler);  
+  }
+
+  function eliminarButtonHandler(event) {
+    event.preventDefault();
+    tareas.splice(tareas.indexOf(currentTarget));
+    loadTareas();
   }
 
   loadTareas();
