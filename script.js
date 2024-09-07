@@ -5,7 +5,7 @@ let tareas = [
         descripcion: "Comer una manzana.",
         asignado: "Persona",
         estado: "Backlog",
-        prioridad: "Prioridad alta",
+        prioridad: "Alta",
         fecha: "2024-09-12"
     },
     {
@@ -14,12 +14,13 @@ let tareas = [
         descripcion: "Llevar al perro al veterinario.",
         asignado: "Cucaracha",
         estado: "Blocked",
-        prioridad: "Prioridad media",
+        prioridad: "Media",
         fecha: "2024-09-22"
     }
 ]
 
-let idActual = tareas.length;
+//let idActual = tareas.length;
+let idActual = tareas.length > 0 ? Math.max(...tareas.map(t => t.id)) + 1 : 0;
 let currentTarget = null;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -73,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function crearTarea(tarea) {
     const template = `<div id=${tarea.id} class="card js-modal-trigger" data-target="modal-editar-tarea">
                         <header class="header">
-                            <span class="prioridad"> ${tarea.prioridad} </span>
+                            <span class="prioridad ${tarea.prioridad}"> </span>
                             <p class="title"> ${tarea.titulo}</p>
                         </header>
                         <div class="card-content">
@@ -254,7 +255,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function eliminarButtonHandler(event) {
     event.preventDefault();
-    tareas.splice(tareas.indexOf(currentTarget));
+    //tareas.splice(tareas.indexOf(currentTarget));
+    const index = tareas.findIndex(t => t.id === currentTarget.id);
+    if (index !== -1) {
+        tareas.splice(index, 1);
+    }
     loadTareas();
   }
 

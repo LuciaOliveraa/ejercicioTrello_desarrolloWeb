@@ -1,15 +1,24 @@
 .body {
     background-color: rgb(248, 241, 231);
-    min-height: 100vh;
+    background-color: rgb(255, 232, 214);
+    min-height: 150vh;
 }
 
+#primer-tramo {
+    background-color: rgb(232, 212, 196);
+    height: 100px;
+    justify-content: left;
+    padding-top: 8px;
+}
 
-.title {
+.title-principal {
     margin-top: 15px;
     margin-bottom: 15px;
-    text-align: center;
-    text-emphasis-color: rgb(49, 47, 47);
-
+    /* text-align: center; */
+    padding-left: 60px;
+    text-emphasis-color: rgb(107, 112, 92);
+    text-decoration-color: rgb(107, 112, 92);
+    font-family: cursive, "Lucida Handwriting";
 }
 
 .button {
@@ -25,6 +34,7 @@
 
 .column {
     background-color: rgb(249, 216, 221);
+    background-color: rgb(221, 190, 169);
     margin: 10px;
     /* min-width: 30px; */
     border-radius: 20px;
@@ -37,6 +47,7 @@
     font-weight: bolder;
     text-align: center;
     background-color: rgb(221, 168, 177);
+    background-color: transparent;
     border-radius: 10px;
     margin-bottom: 15px;
 }
@@ -47,11 +58,43 @@
     margin-bottom: 10px;
 
     /* border-radius: 10px; */
-    /* padding: 15px; */
+    /*padding: 15px;*/
+    /* padding: var(--bulma-card-content-padding);  */
+}
+
+.card .title {
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-bottom: 0%;
+}
+
+.card .content {
+    padding-top: 0px;
+    margin-top: 0px;
 }
 
 .task-title {
     font-weight: bold;
+}
+
+.prioridad {
+    display: inline-block;
+    width: 50px;
+    height: 10px;
+    border-radius: 5px;
+    margin-left: 12px;
+}
+
+.Alta {
+    background-color: rgb(183, 183, 164);
+}
+
+.Media {
+    background-color: rgb(221, 190, 169);
+}
+
+.Baja {
+    background-color: rgb(203, 153, 126);
 }
 
 .buttons-container {

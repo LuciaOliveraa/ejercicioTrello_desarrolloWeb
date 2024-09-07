@@ -10,36 +10,40 @@
       href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     <script src="script.js" defer></script>
 </head>
+
 <body class="body">
-    <h1 class="title"> gestor de tareas </h1>
+    <div id="primer-tramo">
+      <h2 class="title title-principal is-size-1-desktop is-size-1-tablet is-size-1-touch is-size-1-mobile" style="color: rgb(107, 112, 92);"> gestor de tareas . . </h2>
+    </div>    
     <button class="add-task-button button js-modal-trigger" data-target="modal-agregar-tarea"> Agregar tarea </button>
+    
     <div class="columns is-mobile is-multiline">
         <div id="backlog-column" class="column is-one-fifth-desktop is-one-third-tablet is-full-mobile">
-            <h2 class="column-title"> Backlog </h2>
+            <h2 class="column-title is-uppercase" style="color: rgb(165, 165, 141);"> Backlog </h2>
             <div id="Backlog" class="card-container">
                 
             </div>
         </div>
         <div id="to-do-column" class="column is-one-fifth-desktop is-one-third-tablet is-full-mobile">
-            <h2 class="column-title"> To do </h2>
+            <h2 class="column-title is-uppercase" style="color: rgb(165, 165, 141);"> To do </h2>
             <div id="To do" class="card-container">
 
             </div>
         </div>
         <div id="in-progress-column" class="column is-one-fifth-desktop is-one-third-tablet is-full-mobile">
-            <h2 class="column-title"> In progress </h2>
+            <h2 class="column-title is-uppercase" style="color: rgb(165, 165, 141);"> In progress </h2>
             <div id="In progress" class="card-container">
 
             </div>
         </div>
         <div id="blocked-column" class="column is-one-fifth-desktop is-one-third-tablet is-full-mobile">
-            <h2 class="column-title"> Blocked </h2>
+            <h2 class="column-title is-uppercase" style="color: rgb(165, 165, 141);"> Blocked </h2>
             <div id="Blocked" class="card-container">
 
             </div>
         </div>
         <div id="done-column" class="column is-one-fifth-desktop is-one-third-tablet is-full-mobile">
-            <h2 class="column-title"> Done </h2>
+            <h2 class="column-title is-uppercase" style="color: rgb(165, 165, 141);"> Done </h2>
             <div id="Done" class="card-container">
 
             </div>
@@ -86,15 +90,15 @@
             <label> Prioridad </label>
             <div class="select">
                 <select id="prioridad-input">
-                  <option>Prioridad alta</option>
-                  <option>Prioridad media</option>
-                  <option>Prioridad baja</option>
+                  <option>Alta</option>
+                  <option>Media</option>
+                  <option>Baja</option>
                 </select>
             </div>
           </div>
           <div class="box">
             <label> Fecha límite </label>
-            <input id="fecha-input" type="date" value="2024-08-27" />
+            <input id="fecha-input" type="date" />
           </div>
           <div class="buttons-container"> 
             <button id="aceptar-button" class="button"> Aceptar </button>
@@ -145,15 +149,15 @@
             <label> Prioridad </label>
             <div class="select">
                 <select id="prioridad-edit">
-                  <option>Prioridad alta</option>
-                  <option>Prioridad media</option>
-                  <option>Prioridad baja</option>
+                  <option>Alta</option>
+                  <option>Media</option>
+                  <option>Baja</option>
                 </select>
             </div>
           </div>
           <div class="box">
             <label> Fecha límite </label>
-            <input id="fecha-edit" type="date" value="2024-08-27" />
+            <input id="fecha-edit" type="date" />
           </div>
           <div class="buttons-container"> 
             <button id="actualizar-button" class="button button-close"> Actualizar </button>
