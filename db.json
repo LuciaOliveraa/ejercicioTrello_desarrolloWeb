@@ -1,0 +1,21 @@
+[
+    {
+        "id": "0",
+        "titulo": "Nutrirse",
+        "descripcion": "Comer una manzana.",
+        "asignado": "Persona",
+        "estado": "Backlog",
+        "prioridad": "Alta",
+        "fecha": "2024-09-12"
+    },
+    {
+        "id": 1,
+        "titulo": "Bañar al perro",
+        "descripcion": "Llevar al perro al veterinario.",
+        "asignado": "Cucaracha",
+        "estado": "Blocked",
+        "prioridad": "Media",
+        "fecha": "2024-09-22"
+    }
+]
+
