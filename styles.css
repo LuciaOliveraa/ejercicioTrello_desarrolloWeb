@@ -28,17 +28,17 @@
 }
 
 .columns {
-    /* vertical-align: middle; */
-    /* justify-content: center; */
+    vertical-align: middle;
+    justify-content: center;
 }
 
 .column {
     background-color: rgb(249, 216, 221);
     background-color: rgb(221, 190, 169);
-    /* min-height: 150px; */
-    /* margin: 10px; */
+    min-height: 300px;
+    margin: 5px;
     /* min-width: 30px; */
-    /* border-radius: 20px; */
+    border-radius: 20px;
     /* border-left: 0px;
     border-right: 0px; */
     

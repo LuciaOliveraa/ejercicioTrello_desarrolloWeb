@@ -1,26 +1,26 @@
-let tareas = [
-    {
-        id: 0,
-        titulo: "Nutrirse",
-        descripcion: "Comer una manzana.",
-        asignado: "Persona",
-        estado: "Backlog",
-        prioridad: "Alta",
-        fecha: "2024-09-12"
-    },
-    {
-        id: 1,
-        titulo: "Bañar al perro",
-        descripcion: "Llevar al perro al veterinario.",
-        asignado: "Cucaracha",
-        estado: "Blocked",
-        prioridad: "Media",
-        fecha: "2024-09-22"
-    }
-]
+// let tareas = [
+//     {
+//         id: 0,
+//         titulo: "Nutrirse",
+//         descripcion: "Comer una manzana.",
+//         asignado: "Persona",
+//         estado: "Backlog",
+//         prioridad: "Alta",
+//         fecha: "2024-09-12"
+//     },
+//     {
+//         id: 1,
+//         titulo: "Bañar al perro",
+//         descripcion: "Llevar al perro al veterinario.",
+//         asignado: "Cucaracha",
+//         estado: "Blocked",
+//         prioridad: "Media",
+//         fecha: "2024-09-22"
+//     }
+// ]
 
 //let idActual = tareas.length;
-let idActual = tareas.length > 0 ? Math.max(...tareas.map(t => t.id)) + 1 : 0;
+//let idActual = tareas.length > 0 ? Math.max(...tareas.map(t => t.id)) + 1 : 0;
 let currentTarget = null;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -105,17 +105,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
   }
 
-  function loadTareas() {
-    const columnas = ["Backlog", "To do", "In progress", "Blocked", "Done"];
+  function loadTareas(tareeas) {
+    // const columnas = ["Backlog", "To do", "In progress", "Blocked", "Done"];
     
-    //vacia columnas
-    columnas.forEach(columnaId => {
-        const columna = document.getElementById(columnaId);
-        columna.innerHTML = "";
-    });
+    // //vacia columnas
+    // columnas.forEach(columnaId => {
+    //     const columna = document.getElementById(columnaId);
+    //     columna.innerHTML = "";
+    // });
 
     //llena columnas
-    tareas.forEach(tarea => {
+    tareeas.forEach(tarea => {
       crearTarea(tarea);
     });
     //tareas = [];
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fecha = document.getElementById("fecha-input");
 
     const nuevaTarea = {
-        id: idActual +1,
+        //id: idActual +1,
         titulo: titulo.value,
         descripcion: descripcion.value,
         asignado: asignado.value,
@@ -147,8 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
         fecha: fecha.value
     }
 
-    tareas.push(nuevaTarea);
-    idActual = idActual +1;
+    postData(nuevaTarea);
+    //idActual = idActual +1;
 
     titulo.value = "";
     descripcion.value = "";
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     prioridad.value = "";
     fecha.value = "";
 
-    loadTareas();
+    //loadTareas();
   }
 
   function cancelarButton() {
@@ -203,13 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
     prioridad.value = tarea.prioridad;
     fecha.value = tarea.fecha;
 
-    console.log(tarea);
-    console.log(titulo.value);
-    console.log(descripcion.value);
-    console.log(asignado.value);
-    console.log(estado.value);
-    console.log(prioridad.value);
-    console.log(fecha.value);
+    // console.log(tarea);
+    // console.log(titulo.value);
+    // console.log(descripcion.value);
+    // console.log(asignado.value);
+    // console.log(estado.value);
+    // console.log(prioridad.value);
+    // console.log(fecha.value);
 
     const editModal = document.getElementById('modal-editar-tarea');
     editModal.classList.add('is-active');
@@ -240,12 +240,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //tareas.push(tarea); //esta linea necesitaba una eliminación de la tarea, en vez, uso las líneas de a continuación para modificar la tarea.
     
-   const index = tareas.findIndex(t => t.id === tarea.id);
-    if (index !== -1) {
-        tareas[index] = tarea; 
-    }
-
-    loadTareas();
+  //  const index = tareas.findIndex(t => t.id === tarea.id);
+  //   if (index !== -1) {
+  //       tareas[index] = tarea; 
+  //   }
+    actualizarTareaPatch(tarea);
+    fetchDataAW();
   }
 
   function eliminarButton() {
@@ -256,13 +256,108 @@ document.addEventListener('DOMContentLoaded', () => {
   function eliminarButtonHandler(event) {
     event.preventDefault();
     //tareas.splice(tareas.indexOf(currentTarget));
-    const index = tareas.findIndex(t => t.id === currentTarget.id);
-    if (index !== -1) {
-        tareas.splice(index, 1);
-    }
-    loadTareas();
+    // const index = tareas.findIndex(t => t.id === currentTarget.id);
+    // if (index !== -1) {
+    //     tareas.splice(index, 1);
+    // }
+
+    deleteTarea(currentTarget);
+    fetchDataAW();
+    //loadTareas();
   }
 
-  loadTareas();
+  //loadTareas();
 
+  // async function listarTareas() {
+  //   const requestURL = "http://127.0.0.1:5500/localhost: 3000/tasks/"
+  //   const request = new Request(requestURL);
+
+  //   const response = await fetch(requestURL, {
+  //     method: "GET",
+  //     headers: 
+  //   }
+
+  //   )
+  // }
+
+  async function fetchDataAW() {
+    try {
+      const url = "http://localhost:3000/tareas"
+      const response = await fetch(url, { method: "GET" });
+      const data = await response.json(); // extract JSON from response
+      loadTareas(data);
+      //console.log(data);
+    } catch (error) {
+      console.log("Error fetching data: ", error);
+    }
+  }
+
+  async function postData(tarea) {
+    console.log("tarea:", tarea)
+
+    try {
+      const url = "http://localhost:3000/tareas"
+      const response = await fetch(url, { 
+        method: "POST",
+        body: JSON.stringify(tarea) });
+      const data = await response.json(); // extract JSON from response
+      loadTareas(data);
+      //console.log(data);
+    } catch (error) {
+      console.log("Error fetching data: ", error);
+    }
+  }
+
+  async function actualizarTareaPatch(tarea) {
+    console.log("tarea: " + tarea.titulo);
+
+    try {
+      const url = `http://localhost:3000/tareas/${tarea.id}`
+      const response = await fetch(url, { 
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(tarea)
+      });
+
+      const data = await response.json(); // extract JSON from response
   
+    } catch (error) {
+      console.log("Error fetching data: ", error);
+    }
+  }
+
+  async function deleteTarea(tarea) {
+    try {
+      const url = `http://localhost:3000/tareas/${tarea.id}`
+      const response = await fetch(url, { 
+        method: "DELETE",
+        // headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(tarea)
+      });
+
+      const data = await response.json(); // extract JSON from response
+    } catch (error) {
+      console.log("Error fetching data: ", error);
+    }
+  }
+
+  fetchDataAW();
+
+  /*{
+        "id": "0",
+        "titulo": "Nutrirse",
+        "descripcion": "Comer una manzana.",
+        "asignado": "Persona",
+        "estado": "Backlog",
+        "prioridad": "Alta",
+        "fecha": "2024-09-12"
+    },
+    {
+        "id": "1",
+        "titulo": "Bañar al perro",
+        "descripcion": "Llevar al perro al veterinario.",
+        "asignado": "Cucaracha",
+        "estado": "Blocked",
+        "prioridad": "Media",
+        "fecha": "2024-09-22"
+    }*/
