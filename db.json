@@ -6,8 +6,26 @@
       "descripcion": "ikhb",
       "asignado": "Persona",
       "estado": "To do",
-      "prioridad": "Alta",
+      "prioridad": "Media",
       "fecha": "2024-09-26"
+    },
+    {
+      "id": "42a1",
+      "titulo": "kjn",
+      "descripcion": "yrx",
+      "asignado": "Cucaracha",
+      "estado": "Backlog",
+      "prioridad": "Alta",
+      "fecha": "2024-10-04"
+    },
+    {
+      "id": "1858",
+      "titulo": "ouy",
+      "descripcion": "yfcv",
+      "asignado": "Alien",
+      "estado": "In progress",
+      "prioridad": "Baja",
+      "fecha": "2024-10-03"
     }
   ]
 }

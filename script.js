@@ -1,26 +1,3 @@
-// let tareas = [
-//     {
-//         id: 0,
-//         titulo: "Nutrirse",
-//         descripcion: "Comer una manzana.",
-//         asignado: "Persona",
-//         estado: "Backlog",
-//         prioridad: "Alta",
-//         fecha: "2024-09-12"
-//     },
-//     {
-//         id: 1,
-//         titulo: "Bañar al perro",
-//         descripcion: "Llevar al perro al veterinario.",
-//         asignado: "Cucaracha",
-//         estado: "Blocked",
-//         prioridad: "Media",
-//         fecha: "2024-09-22"
-//     }
-// ]
-
-//let idActual = tareas.length;
-//let idActual = tareas.length > 0 ? Math.max(...tareas.map(t => t.id)) + 1 : 0;
 let currentTarget = null;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -95,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const columna = document.getElementById(tarea.estado);
     const tarjeta = document.createElement("div");
-    //columna.insertAdjacentHTML("beforeend", tarjeta);
+
     tarjeta.innerHTML = template;
     columna.appendChild(tarjeta);
     
@@ -106,19 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function loadTareas(tareeas) {
-    // const columnas = ["Backlog", "To do", "In progress", "Blocked", "Done"];
-    
-    // //vacia columnas
-    // columnas.forEach(columnaId => {
-    //     const columna = document.getElementById(columnaId);
-    //     columna.innerHTML = "";
-    // });
-
-    //llena columnas
     tareeas.forEach(tarea => {
       crearTarea(tarea);
     });
-    //tareas = [];
   }
 
   function agregarTarea() {
@@ -138,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const fecha = document.getElementById("fecha-input");
 
     const nuevaTarea = {
-        //id: idActual +1,
         titulo: titulo.value,
         descripcion: descripcion.value,
         asignado: asignado.value,
@@ -148,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     postData(nuevaTarea);
-    //idActual = idActual +1;
 
     titulo.value = "";
     descripcion.value = "";
@@ -156,8 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
     estado.value = "";
     prioridad.value = "";
     fecha.value = "";
-
-    //loadTareas();
   }
 
   function cancelarButton() {
@@ -203,14 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
     prioridad.value = tarea.prioridad;
     fecha.value = tarea.fecha;
 
-    // console.log(tarea);
-    // console.log(titulo.value);
-    // console.log(descripcion.value);
-    // console.log(asignado.value);
-    // console.log(estado.value);
-    // console.log(prioridad.value);
-    // console.log(fecha.value);
-
     const editModal = document.getElementById('modal-editar-tarea');
     editModal.classList.add('is-active');
   }
@@ -238,12 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
     tarea.prioridad = prioridad.value;
     tarea.fecha = fecha.value;
 
-    //tareas.push(tarea); //esta linea necesitaba una eliminación de la tarea, en vez, uso las líneas de a continuación para modificar la tarea.
-    
-  //  const index = tareas.findIndex(t => t.id === tarea.id);
-  //   if (index !== -1) {
-  //       tareas[index] = tarea; 
-  //   }
     actualizarTareaPatch(tarea);
     fetchDataAW();
   }
@@ -255,30 +204,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function eliminarButtonHandler(event) {
     event.preventDefault();
-    //tareas.splice(tareas.indexOf(currentTarget));
-    // const index = tareas.findIndex(t => t.id === currentTarget.id);
-    // if (index !== -1) {
-    //     tareas.splice(index, 1);
-    // }
 
     deleteTarea(currentTarget);
     fetchDataAW();
-    //loadTareas();
   }
-
-  //loadTareas();
-
-  // async function listarTareas() {
-  //   const requestURL = "http://127.0.0.1:5500/localhost: 3000/tasks/"
-  //   const request = new Request(requestURL);
-
-  //   const response = await fetch(requestURL, {
-  //     method: "GET",
-  //     headers: 
-  //   }
-
-  //   )
-  // }
 
   async function fetchDataAW() {
     try {
@@ -286,7 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(url, { method: "GET" });
       const data = await response.json(); // extract JSON from response
       loadTareas(data);
-      //console.log(data);
     } catch (error) {
       console.log("Error fetching data: ", error);
     }
@@ -302,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(tarea) });
       const data = await response.json(); // extract JSON from response
       loadTareas(data);
-      //console.log(data);
     } catch (error) {
       console.log("Error fetching data: ", error);
     }
@@ -331,7 +258,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const url = `http://localhost:3000/tareas/${tarea.id}`
       const response = await fetch(url, { 
         method: "DELETE",
-        // headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(tarea)
       });
 
